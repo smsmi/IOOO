@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>{{ profile }} | IOOO</title>
+		<link rel="stylesheet" type="text/css" href="templates/css/reset.css" />
+		<link rel="stylesheet" type="text/css" href="templates/css/grid.css" />
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css" />
+
+		<link rel="stylesheet" type="text/css" href="templates/css/standard.css" />
+		<link rel="stylesheet" type="text/css" href="templates/css/styles.css" />
+	</head>
+	<body>
+		<data id="d-profile" data-profile="{{ profile }}"></data>
+		<data id="d-query" data-query="{{ searchQuery }}"></data>
+		<data id="d-offset" data-offset="{{ offset }}"></data>
+		<div class="header-omnibar grid">
+			<div id="title-block" class="col-1-10">
+				<h1><a href="?profile={{ profile }}">IOOO</a></h1>
+			</div>
+			<div id="search" class="col-9-10">
+				<input id="omnisearch" value="{{ profile }}:{{ searchQuery }}" />
+			</div>
+		</div>
+		<div class="container grid">
+			<div id="timeline" class="col-4-5">
+				<div class="grid-sizer"></div>
+				{% for item in posts %}
+					<div class="entry"><a href='index.php?profile={{ profile }}&id={{ item.id }}'><img src='{{ item.image }}' /></a></div>
+				{% endfor %}
+			</div>
+			<div class="col-1-5">
+				<ul id="taglist">
+					<li class="tag-item" id="new-memo"><label class="toggle" for="toggle"><i class="fa fa-fw fa-plus-square"></i>&nbsp;New Memo</label></li>
+
+					<br/>
+					<li class="tag-item"><a href="?profile={{ profile }}"><i class="fa fa-fw fa-tags"></i>&nbsp;all</a></li>
+				{% for item in taglist %}
+					<li class="tag-item"><a href="?profile={{ profile }}&q={{ item.tag }}"><i class="fa fa-fw fa-tag"></i>&nbsp;{{ item.tag }}</a></li>
+				{% endfor %}
+				</ul>
+			</div>
+		</div>
+
+		<!-- Checkbox to show/hide the navigation menu -->
+		<input type="checkbox" name="menu" value="toggle" id="toggle">
+		<div id="new-memo-frame">
+			<!-- Label for #showmenu to hide the menu/uncheck the checkbox -->
+			<label class="toggle" for="toggle"><i class="fa fa-2x fa-times-circle"></i></label>
+
+			<h2>New Memo</h2>
+			<form id="new-memo-form" action="api/submit.php" method="POST">
+				<data id="d-edit" data-edit=""></data>
+				<data id="d-pid" data-pid=""></data>
+				<input id="memo-imageurl" type="text" placeholder="image URL" />
+				<textarea id="memo-description" placeholder="description"></textarea>
+				<input id="memo-tags" type="text" placeholder="tags (comma-separated)" />
+				<input id="memo-submit" type="submit" value="submit"/>
+				<p id="memo-submit-result"></p>
+			</form>
+		</div>
+
+		<script type="text/javascript" src="templates/js/jquery-2.0.3.min.js"></script>
+		<script type="text/javascript" src="templates/js/masonry.pkgd.min.js"></script>
+		<script type="text/javascript" src="templates/js/imagesloaded.pkgd.min.js"></script>
+		<script type="text/javascript" src="templates/js/main.js"></script>
+	</body>
+</html>

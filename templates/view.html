@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>IOOO | {{ profile }} </title>
+
+		<meta charset="utf-8" />
+
+		<meta property="og:title" content="IOOO" />
+		<meta property="og:type" content="website" />
+		<meta property="og:image" content="{{ img }}" />
+		<meta property="description" content="{{ desc }}" />
+		<meta property="og:description" content="{{ desc }}" />
+
+		<link rel="stylesheet" type="text/css" href="templates/css/reset.css" />
+		<link rel="stylesheet" type="text/css" href="templates/css/grid.css" />
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css" />
+
+		<link rel="stylesheet" type="text/css" href="templates/css/standard.css" />
+		<link rel="stylesheet" type="text/css" href="templates/css/styles.css" />
+	</head>
+	<body>
+	<div class="header-omnibar grid">
+			<div id="title-block" class="col-1-10">
+				<h1><a href="?profile={{ profile }}">IOOO</a></h1>
+			</div>
+			<div id="search" class="col-9-10">
+				<p>{{ query }}</p>
+			</div>
+		</div>
+		<div class="grid">
+			<div class="imgview col-4-5">
+				<img src="{{ img }}" />
+				<p id="post-description">{{ desc }}</p>
+			</div>
+			<div class="col-1-5">
+				<ul id="taglist">
+					{% if isOwnPost %}
+					<li class="tag-item" id="new-memo"><label class="toggle" for="toggle"><i class="fa fa-fw fa-plus-square"></i>&nbsp;Edit This Memo</label></li>
+					{% endif %}
+
+					<br/>
+					<li class="tag-item"><a href="?profile={{ profile }}"><i class="fa fa-fw fa-tags"></i>&nbsp;all</a></li>
+				{% for item in taglist %}
+					<li class="tag-item"><a href="?profile={{ profile }}&q={{ item.tag }}"><i class="fa fa-fw fa-tag"></i>&nbsp;{{ item.tag }}</a></li>
+				{% endfor %}
+				</ul>
+			</div>
+		</div>
+
+		<!-- Checkbox to show/hide the navigation menu -->
+		<input type="checkbox" name="menu" value="toggle" id="toggle">
+		<div id="new-memo-frame">
+			<!-- Label for #showmenu to hide the menu/uncheck the checkbox -->
+			<label class="toggle" for="toggle"><i class="fa fa-2x fa-times-circle"></i></label>
+
+			{% if auth and isOwnPost %}
+			<h2>Edit Memo</h2>
+			<form id="new-memo-form" action="api/submit.php" method="POST">
+				<data id="d-edit" data-edit="edit"></data>
+				<data id="d-pid" data-pid="{{ postID }}"></data>
+				<input id="memo-imageurl" type="text" placeholder="image URL" value="{{ img }}" />
+				<textarea id="memo-description" placeholder="description">{{ desc }}</textarea>
+				<input id="memo-tags" type="text" placeholder="tags (comma-separated)" value="{{ tagsString }}" />
+				<input id="memo-submit" type="submit" value="submit"/>
+				<p id="memo-submit-result"></p>
+			</form>
+			{% endif %}
+		</div>
+
+
+		<script type="text/javascript" src="templates/js/jquery-2.0.3.min.js"></script>
+		<script type="text/javascript" src="templates/js/masonry.pkgd.min.js"></script>
+		<script type="text/javascript" src="templates/js/imagesloaded.pkgd.min.js"></script>
+		<script type="text/javascript" src="templates/js/main.js"></script>
+	</body>
+</html>

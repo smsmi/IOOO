@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>IOOO | Login or Register</title>
+
+		<link rel="stylesheet" type="text/css" href="templates/css/grid.css">
+		<link rel="stylesheet" type="text/css" href="templates/css/forms.css">
+		<style type="text/css">
+			#container {
+				width: 800px;
+				margin: 0 auto;
+				margin-top: 100px;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="container" class="grid">
+			<form action="register.php" method="POST" class="col-1-2">
+				<p class="result">{{ responseR }}</p>
+				
+				<label>
+					<span>E-mail</span>
+					<input id="name" type="text" name="email" placeholder="email" />
+				</label>
+				<label>
+					<span>Password</span>
+					<input type="password" name="password" placeholder="password" />
+				</label>
+				<label>
+					<span>Confirm</span>
+					<input type="password" name="retype" placeholder="confirm password" />
+				</label>
+				<label>
+					<span>Username</span>
+					<input type="text" name="username" placeholder="username" />
+				</label>
+				<label>
+					<span>&nbsp;</span>
+					<input type="submit" class="button" name="submit-register" value="Register" />
+				</label>
+			</form>
+			<form action="login.php" method="POST" class="col-1-2">
+				<p class="result">{{ response }}</p>
+				
+				<label>
+					<span>E-mail</span>
+					<input id="name" type="text" name="email" placeholder="email" />
+				</label>
+				<label>
+					<span>Password</span>
+					<input type="password" name="pass" placeholder="password" />
+				</label>
+				<label>
+					<span>&nbsp;</span>
+					<input type="submit" class="button" name="submit-login" value="Login" />
+				</label>
+				<p><a href="forgot.php">forgot?</a></p>
+			</form>
+		</div>
+	</body>
+</html>
