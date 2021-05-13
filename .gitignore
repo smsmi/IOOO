@@ -2,7 +2,6 @@
 *.sublime-workspace
 *.sublime-project
 
-lib/init.php
 temp/*
 uploads/*
 media/*
